@@ -1,0 +1,192 @@
+(* Content-type: application/mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 7.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       145,          7]
+NotebookDataLength[      6292,        183]
+NotebookOptionsPosition[      5875,        165]
+NotebookOutlinePosition[      6308,        182]
+CellTagsIndexPosition[      6265,        179]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"levelCount", " ", "=", "5"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"sp", " ", "=", " ", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "0", ",", " ", 
+     RowBox[{"{", 
+      RowBox[{"0", ",", " ", 
+       RowBox[{"levelCount", " ", "-", " ", "1"}], ",", " ", "0"}], "}"}]}], 
+    "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"points", " ", "=", " ", 
+   RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"For", "[", 
+   RowBox[{
+    RowBox[{"i", "=", "0"}], ",", " ", 
+    RowBox[{"i", " ", "<", " ", "levelCount"}], ",", " ", 
+    RowBox[{"i", "++"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"AppendTo", "[", 
+       RowBox[{"points", ",", " ", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"sp", "[", 
+           RowBox[{"[", "1", "]"}], "]"}], ",", " ", 
+          RowBox[{"sp", "[", 
+           RowBox[{"[", "2", "]"}], "]"}], ",", " ", 
+          RowBox[{"ToString", "[", 
+           RowBox[{"sp", "[", 
+            RowBox[{"[", "3", "]"}], "]"}], "]"}]}], "}"}]}], "]"}], 
+      "\[IndentingNewLine]", 
+      RowBox[{"For", "[", 
+       RowBox[{
+        RowBox[{"j", "=", "0"}], ",", " ", 
+        RowBox[{"j", " ", "<", " ", "i"}], ",", " ", 
+        RowBox[{"j", "++"}], ",", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"AppendTo", "[", 
+          RowBox[{"points", ",", " ", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"sp", "[", 
+               RowBox[{"[", "1", "]"}], "]"}], " ", "+", " ", "j", " ", "+", 
+              " ", "1"}], ",", " ", 
+             RowBox[{"sp", "[", 
+              RowBox[{"[", "2", "]"}], "]"}], ",", " ", 
+             RowBox[{"ToString", "[", 
+              RowBox[{"{", 
+               RowBox[{
+                RowBox[{
+                 RowBox[{"sp", "[", 
+                  RowBox[{"[", 
+                   RowBox[{"3", ",", "1"}], "]"}], "]"}], " ", "-", " ", "j", 
+                 " ", "-", "1"}], ",", " ", 
+                RowBox[{"sp", "[", 
+                 RowBox[{"[", 
+                  RowBox[{"3", ",", "2"}], "]"}], "]"}], ",", " ", 
+                RowBox[{
+                 RowBox[{"sp", "[", 
+                  RowBox[{"[", 
+                   RowBox[{"3", ",", "3"}], "]"}], "]"}], "+", "j", "+", 
+                 "1"}]}], "}"}], "]"}]}], "}"}]}], "]"}], ";"}]}], 
+       "\[IndentingNewLine]", "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"sp", " ", "=", " ", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"sp", "[", 
+          RowBox[{"[", "1", "]"}], "]"}], "-", 
+         RowBox[{"1", "/", "2"}]}], ",", " ", 
+        RowBox[{
+         RowBox[{"sp", "[", 
+          RowBox[{"[", "2", "]"}], "]"}], "-", " ", 
+         RowBox[{
+          RowBox[{"Sqrt", "[", "3", "]"}], "/", "2"}]}], ",", " ", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"sp", "[", 
+            RowBox[{"[", 
+             RowBox[{"3", ",", "1"}], "]"}], "]"}], "+", "1"}], ",", " ", 
+          RowBox[{
+           RowBox[{"sp", "[", 
+            RowBox[{"[", 
+             RowBox[{"3", ",", "2"}], "]"}], "]"}], "-", "1"}], ",", 
+          RowBox[{"sp", "[", 
+           RowBox[{"[", 
+            RowBox[{"3", ",", "3"}], "]"}], "]"}]}], "}"}]}], "}"}]}], 
+     ";"}]}], "\[IndentingNewLine]", "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"Export", "[", 
+  RowBox[{
+  "\"\</home/meerkat/Documents/Matrix/figures/triangle_array_with_labels.pdf\>\
+\"", ",", 
+   RowBox[{"Graphics", "[", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"points", "/.", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"x_", ",", "y_", ",", "l_String"}], "}"}], "\[RuleDelayed]", 
+         RowBox[{"Text", "[", 
+          RowBox[{
+           RowBox[{"StringReplace", "[", 
+            RowBox[{"l", ",", " ", 
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"\"\<{\>\"", " ", "\[Rule]", " ", "\"\<(\>\""}], ",", 
+               " ", 
+               RowBox[{"\"\<}\>\"", " ", "\[Rule]", " ", "\"\<)\>\""}]}], 
+              "}"}]}], "]"}], ",", 
+           RowBox[{"{", 
+            RowBox[{"x", ",", "y"}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{"0", ",", 
+             RowBox[{"-", "1"}]}], "}"}]}], "]"}]}]}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"points", "/.", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"x_", ",", "y_", ",", "l_String"}], "}"}], "\[RuleDelayed]", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"PointSize", "[", "0.02", "]"}], ",", 
+           RowBox[{"Point", "[", 
+            RowBox[{"{", 
+             RowBox[{"x", ",", "y"}], "}"}], "]"}]}], "}"}]}]}], "}"}]}], 
+     "}"}], "]"}]}], "]"}]}], "Input",
+ CellChangeTimes->{{3.586848388786605*^9, 3.586848493524221*^9}, {
+  3.586848587317739*^9, 3.586848630522271*^9}, {3.586848942190077*^9, 
+  3.5868489442921886`*^9}, {3.5868491431806498`*^9, 3.586849143873782*^9}}],
+
+Cell[BoxData["\<\"/home/meerkat/Documents/Matrix/figures/triangle_array_with_\
+labels.pdf\"\>"], "Output",
+ CellChangeTimes->{
+  3.586848342395776*^9, {3.586848453973818*^9, 3.586848494813093*^9}, 
+   3.586848634938191*^9, 3.586848945806991*^9, 3.586849145938383*^9}]
+}, Open  ]]
+},
+WindowSize->{2560, 1381},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+Magnification:>FEPrivate`If[
+  FEPrivate`Equal[FEPrivate`$VersionNumber, 6.], 2., 2. Inherited],
+FrontEndVersion->"7.0 for Linux x86 (64-bit) (October 28, 2009)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[567, 22, 5022, 134, 558, "Input"],
+Cell[5592, 158, 267, 4, 89, "Output"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

@@ -1,0 +1,211 @@
+\section{$\tau$-теорема}
+
+В этом разделе мы рассмотрим прямые суммы матричных тензоров, а именно суммы вида $\left\langle k,1,n \right\rangle \oplus \left\langle 1,m,1 \right\rangle$. Первое слагаемое является произведением вектора длины $k$ и вектора длины $n$, которое даёт матрицу ранга 1. Второе слагаемое --- это скалярное произведение двух векторов длины $m$.
+
+\begin{remark}\label{rem:bi:6.1}\ 
+  	\begin{enumerate}
+	     \item $R(\left\langle k,1,n \right\rangle \oplus \left\langle 1,m,1 \right\rangle) = k \cdot n + m$
+	     \item $\underline{R}(\left\langle k,1,n \right\rangle) = k \cdot n$ и $\underline{R}(\left\langle 1,m,1 \right\rangle) = m$
+	     \item $\underline{R}(\left\langle k,1,n \right\rangle \oplus \left\langle 1,m,1 \right\rangle) \leq k \cdot n + 1$, где $m = (n-1)(k-1)$. 
+	\end{enumerate}	
+\end{remark}
+
+Первое утверждение можно доказать, используя метод подстановок. Мы сначала заменяем $m$ переменных, принадлежащих одному из векторов $\left\langle 1,m,1 \right\rangle$. Затем мы устанавливаем переменные другого вектора в ноль. Мы всё ещё вычисляем $\left\langle k,1,n \right\rangle$.
+
+Для второго утверждения достаточно заметить, что оба тензора состоят из $kn$ и $m$ линейно независимых слоёв соответственно.
+
+Для третьего утверждения мы только докажем случай $k=n=3$. Из него общее построение станет очевидным. Итак мы хотим вычислить $a_i b_j$ для $1 \leq i,j \leq 3$ и $\sum_{\mu=1}^4 u_{\mu} v_{\mu}$. Рассмотрим следующие произведения
+\begin{align*}
+  p_1 & = (a_1 + \varepsilon u_1)(b_1 + \varepsilon v_1)\\
+  p_2 & = (a_1 + \varepsilon u_2)(b_2 + \varepsilon v_2)\\
+  p_3 & = (a_2 + \varepsilon u_3)(b_1 + \varepsilon v_3)\\    
+  p_4 & = (a_2 + \varepsilon u_4)(b_2 + \varepsilon v_4)\\
+  p_5 & = (a_3 - \varepsilon u_1 - \varepsilon u_3)b_1\\
+  p_6 & = (a_3 - \varepsilon u_2 - \varepsilon u_4)b_2\\
+  p_7 & = a_1 (b_3 - \varepsilon v_1 - \varepsilon v_2)\\
+  p_8 & = a_2 (b_3 - \varepsilon v_3 - \varepsilon v_4)\\
+  p_9 & = a_3 b_3
+\end{align*}
+Эти девять произведений очевидно вычисляют $a_i b_j, \; 1 \leq i,j \leq 3$. Более того
+\[
+	\varepsilon^2 \sum_{\mu=1}^4 u_{\mu} v_{\mu} = p_1 + \dotsb + p_9 - (a_1 + a_2 + a_3)(b_1 + b_2 + b_3)
+\]
+Таким образом десяти произведений оказывается достаточным, чтобы приближённо вычислить $\left\langle 3,1,3 \right\rangle \oplus \left\langle 1,4,1 \right\rangle$.
+
+Второе и третье утверждения вместе показывают, что аддитивная гипотеза \ref{res:bi:4.1} не верна для граничного ранга. Мы попытаемся использовать это следующим образом.
+
+\begin{definition}\label{def:bi:6.2}
+     Пусть $t \in K^{k \times m \times n}$ и $t' \in K^{k' \times m' \times n'}$.
+	\begin{enumerate}
+	     \item $t$ называется \textbf{ограничением} $t'$, если существуют гомоморфизмы $\alpha: K^{k'} \to K^{k}, \beta: K^{m'} \to K^{m}$ и $\gamma: K^{n'} \to K^{n}$ такие, что $t = (\alpha \otimes \beta \otimes \gamma)t'$. Будем писать $t \leq t'$.
+	     \item $t$ и $t'$ будут изоморфными, если $\alpha, \beta, \gamma$ --- изоморфизмы ($t \cong t'$).
+	\end{enumerate}
+\end{definition}
+
+В дальнейшем $\left\langle r \right\rangle$ будет обозначать тензор в $K^{r \times r \times r}$, который имеет 1 в позициях $(\rho, \rho, \rho)$ и 0 во всех остальных. Этот тензор соответствует $r$ билинейным формам $x_{\rho} y_{\rho}, 1 \leq \rho \leq r$ ($r$ независимых произведений)
+
+\begin{lemma}\label{lem:bi:6.3}
+  $R(t) \leq r \iff t \leq \left\langle r \right\rangle$
+\end{lemma}
+\begin{proof}\ \\
+  ($\Longleftarrow$) Немедленно из леммы \ref{lem:bi:4.4}.\\
+  ($\Longrightarrow$) $\left\langle r \right\rangle = \sum_{\rho = 1}^r e_{\rho} \otimes e_{\rho} \otimes e_{\rho}$, где $e_{\rho}$ --- это $\rho$-ый единичный вектор. Если ранг $t$ меньше равен $r$, то мы можем записать $t$ как сумму $r$ триад
+\[
+	t = \sum_{\rho=1}^r u_{\rho} \otimes v_{\rho} \otimes w_{\rho}.
+\]
+Определим три гомоморфизма:
+\begin{align*}
+	\alpha & \text{ задаётся как } e_{\rho} \mapsto u_{\rho}; \; 1 \leq \rho \leq r\\
+	\beta & \text{ задаётся как } e_{\rho} \mapsto v_{\rho}; \; 1 \leq \rho \leq r\\
+	\gamma & \text{ задаётся как } e_{\rho} \mapsto w_{\rho}; \; 1 \leq \rho \leq r\\
+\end{align*}
+По построению
+\[
+	(\alpha \otimes \beta \otimes \gamma)\left\langle r \right\rangle = \sum_{\rho=1}^r \underbrace{\alpha(e_{\rho})}_{=u_{\rho}} \otimes \underbrace{\beta(e_{\rho})}_{=v_{\rho}} \otimes \underbrace{\gamma(e_{\rho})}_{=w_{\rho}} = t,
+\]
+что завершает доказательство.
+\end{proof}
+
+\begin{observation}\ 
+  \begin{enumerate}
+       \item $t \otimes t' \cong t' \otimes t$
+       \item $t \otimes (t' \otimes t'') \cong (t \otimes t') \otimes t''$
+       \item $t \oplus t' \cong t' \oplus t$
+       \item $t \oplus (t' \oplus t'') \cong (t \oplus t') \oplus t''$
+       \item $t \otimes \left\langle 1 \right\rangle \cong t$
+       \item $t \oplus \left\langle 0 \right\rangle \cong t$
+       \item $t \otimes (t' \oplus t'') \cong t \otimes t' \oplus t \otimes t''$
+  \end{enumerate}
+\end{observation}
+
+Выше $\left\langle 0 \right\rangle$ обозначает пустой тензор в $K^{0 \times 0 \times 0}$. Поэтому тензоры (точнее классы изоморфизмов тензоров) образуют полукольцо. От кольца оно отличается тем, что не требуется существование обратного по сложению элемента. Например, полукольцом будет множество натуральных чисел $\mathbb{N}$. (Замечание: Если два тензора изоморфны, то они живут в одном пространстве $K^{k \times m \times n}$. Если $t$ --- любой тензор, и $n$ --- тензор заполненный одними нулями, то $t$ не изоморфен $t \oplus n$. Но с точки зрения вычислений эти тензоры \textbf{одинаковы}. Поэтому будет удобно использовать более широкое понятие эквивалентности. Будем говорить, что два тензоры $t$ и $t'$ изоморфны, если существуют тензоры $n$ и $n'$, состоящие из одних нулей, такие, что $t \oplus n$ и $t' \oplus n'$ изоморфны.) 
+
+Основным результатом из этого раздела будет следующая теорема за авторством Шёнхаге \cite{Schonhage81}. В литературе она часто называется $\tau$-теоремой, потому что $\tau$ играет важную роль в оригинальном доказательстве. В нашем доказательстве её роль скромнее.
+
+\begin{theorem}[$\tau$-теорема Шёнхаге]\label{th:bi:6.4} Если $\brank{\bigoplus_{i=1}^p \mt{k_i, m_i, n_i}} \leq r$, где $r > p$, то $\omega \leq 3 \tau$, где $\tau$ определена следующим образом
+\[
+	\sum_{i=1}^p (k_i m_i n_i)^{\tau} = r.
+\]
+Если не использовать $\tau$, то утверждение будет иметь следующий вид
+\[
+	\brank{\bigoplus_{i=1}^p \mt{k_i, m_i, n_i}} \leq r \implies \sum_{i=1}^p (k_i m_i n_i)^{\omega/3} \leq r.
+\]
+\end{theorem}
+
+\begin{notation}
+  Пусть $f \in \mathbb{N}$, $t$ --- это тензор. $f \odot t \overset{Def}{=} \underbrace{t \oplus \dotsb \oplus t}_{f \text{ раз }}$.
+\end{notation}
+
+\begin{lemma}\label{lem:bi:6.5} 
+	Если $R(f \odot \mt{k, m, n}) \leq g$, то $\omega \leq 3 \cdot \frac{\log \ceilfrac{g}{f}}{\log (kmn)}$.
+\end{lemma}
+\begin{proof}
+ 	Сначала покажем, что для всех $s$, $R(f \odot \mt{k^s, m^s, n^s}) \leq \ceilfrac{g}{f}^s \cdot f$.
+
+	Доказательство индукцией по $s$: Если $s=1$, то это просто условие леммы.\\
+	$s \to s+1$: Имеем
+	\begin{align*}
+		f \odot \mt{k^{s+1}, m^{s+1}, n^{s+1}} & = \underbrace{(f \odot \mt{k, m, n})}_{\leq \mt{g}} \otimes \mt{k^s, m^s, n^s}\\
+		& \leq \mt{g} \otimes \mt{k^s, m^s, n^s}\\
+		& = g \odot \mt{k^s, m^s, n^s}
+	\end{align*}
+	Поэтому
+	\begin{align*}
+		\rank{f \odot \mt{k^{s+1}, m^{s+1}, n^{s+1}}} & \leq \rank{g \odot \mt{k^s, m^s, n^s}}\\
+		& \rank{ \ceilfrac{g}{f} \cdot f \odot \mt{k^s, m^s, n^s}}\\
+		& = \ceilfrac{g}{f} \ceilfrac{g}{f}^s  f\\
+		& = \ceilfrac{g}{f}^{s+1} f
+	\end{align*}
+	Это доказывает утверждение. Теперь используем это утверждение, чтобы доказать лемму: 
+	\[
+		R(\mt{k^s, m^s, n^s}) \leq R(f \odot \mt{k^s, m^s, n^s}) = \ceilfrac{g}{f}^s \cdot f	
+	\]
+	означает, что по теореме \ref{th:4.7}
+	\[
+		\omega \leq 3 \frac{\log \ceilfrac{g}{f}^s f}{\log (kmn)^s} = \frac{3s \log \ceilfrac{g}{f} + 3 \log f}{s \cdot \log (kmn)} = \frac{3 \log \ceilfrac{g}{f} + \overbrace{\frac{3}{s} \log f}^{\to 0 \text{ при } s \to \infty}}{\log (kmn)}.
+	\]
+	Так как $\omega$ является инфимумом, получим $\omega \leq \frac{3 \log \ceilfrac{g}{f}}{\log(kmn)}$.
+\end{proof}
+
+\begin{proof}[Доказательство теоремы \ref{th:bi:6.4}]
+	Существует $h$ такой, что
+	\[
+		R_h (\bigoplus_{i=1}^p \left\langle k_i, m_i, n_i \right\rangle) \leq r.
+	\]
+	Взяв тензорную степень и используя факт, что тензоры образуют полукольцо, получим
+	\[
+		R_{hs} \left( \bigoplus_{\sigma_1 + \dotsb + \sigma_p = s} \frac{s!}{\sigma_1! \dotsm \sigma_p!} \odot \left\langle \underbrace{\prod_{i=1}^p k_i^{\sigma_i}}_{=k'}, \underbrace{\prod_{i=1}^p m_i^{\sigma_i}}_{=m'}, \underbrace{\prod_{i=1}^p n_i^{\sigma_i}}_{=n'} \right\rangle \right) \leq r^s.
+	\]
+	$k', m', n'$ зависят от $\sigma_1, \dotsc, \sigma_p$. Затем превратим приближённое вычисление в точное и получим
+	\[
+		R \left( \bigoplus_{\sigma_1 + \dotsb + \sigma_p = s} \frac{s!}{\sigma_1! \dotsm \sigma_p!} \odot \left\langle k', m', n' \right\rangle \right) \leq r^s \cdot \underbrace{c_{hs}}_{\text{многочлен от } h \text{ и } s}.
+	\]
+	Определим $\tau$ как $\sum\limits_{\sigma_1 + \dotsb + \sigma_p = s} \underbrace{\frac{s!}{\sigma_1! \dotsm \sigma_p!} (k' m' n')^{\tau}}_{=(1)} = r^s$.
+	
+	Зафиксируем $\sigma_1, \dotsc, \sigma_p$ такими, что $(1)$ максимально. Тогда $k', m'$ и $n'$ будут константами. Чтобы применить лемму \ref{lem:bi:6.5}, зададим
+	\begin{align*}
+		f & = \frac{s!}{\sigma_1! \dotsm \sigma_p!} < p^s,\\
+		g & = r^s \cdot c_{hs}\\
+		k & = k', \; m = m', \; n = n'.   
+	\end{align*}
+	Число всех $\vec{\sigma}$, где $\sigma_1 + \dotsb + \sigma_p = s$ равно
+	\[
+		\dbinom{s + p - 1}{p-1} = \frac{s+p-1}{p-1} \cdot \frac{s+p-2}{p-2} \dotso \leq (s+1)^{p-1}.
+	\]
+	Таким образом
+	\[
+		f \cdot (kmn)^{\tau} \geq \frac{r^s}{(s+1)^{p-1}}.
+	\]
+	Мы получим, что
+	\[
+		\left\lceil \frac{g}{f} \right\rceil \leq \frac{r^s \cdot c_{hs}}{f} + 1 \leq (kmn)^{\tau} \cdot (s+1)^{p-1} \cdot c_{hs}.
+	\]
+	Более того
+	\begin{equation}\label{eq:bi:6.1}
+		(kmn)^{\tau} \geq \frac{r^s}{(s+1)^{p-1} f} \geq \frac{r^s}{(s+1)^{p-1} p^s}.
+	\end{equation}
+	Заметив, что если ранг прямой суммы матричный тензоров меньше равен $g$, то тогда и ранг наибольшего слагаемого будет меньше равен $g$, то есть
+	\[
+		R(f \odot \left\langle k,m,n \right\rangle) \leq g,
+	\]
+	и применив лемму \ref{lem:bi:6.5}, получим
+	\begin{align*}
+		\omega & \leq 3 \frac{\tau \log(kmn) + (p-1) \log(s+1) + \log(c_{hs})}{\log(kmn)}   \\
+		& = 3 \tau + \frac{(p-1) \log(s+1) + \log(c_{hs})}{\log(kmn)} \underset{s \to \infty}{\to} 3 \tau,
+	\end{align*}
+	потому что $\log(kmn) \geq \frac{1}{\tau} s \underbrace{(\log r - \log p)}_{> 0} - O(\log s)$ согласно неравенству \eqref{eq:bi:6.1}.
+\end{proof}
+
+Используя пример из начала этого раздела с $k=4$ и $n=4$, получим следующую оценку из $\tau$-теоремы.
+\begin{corollary}
+	$\omega < 2.55$.
+\end{corollary}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

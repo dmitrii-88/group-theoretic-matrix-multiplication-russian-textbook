@@ -1,0 +1,209 @@
+\section{Лазерный метод Штрассена}
+
+Рассмотрим следующий тензор
+\[
+	\str = \sum_{i=1}^q \left(\underbrace{e_i \otimes e_0 \otimes e_i}_{\mt{q,1,1}} + \underbrace{e_0 \otimes e_i \otimes e_i}_{\mt{1,1,q}} \right)
+\]
+Этот тензор подобен $\mt{1,2,q}$, только <<направления>> этих двух скалярных произведений не одинаковы. Однако тензор Штрассена может быть очень эффективно приближен. Мы имеем
+\[
+	\sum_{i=1}^q (e_0 + \varepsilon e_i) \otimes (e_0 + \varepsilon e_i) \otimes e_i 
+	= \sum_{i=1}^q e_0 \otimes e_0 \otimes e_i + \varepsilon \sum_{i=1}^q \left( e_i \otimes e_0 \otimes e_i + e_0 \otimes e_i \otimes e_i \right) + O(\varepsilon^2)
+\]
+Если мы вычтем триаду $e_i \otimes e_i \otimes \sum_{i=1}^q e_i$, мы получим приближение $\str$. Таким образом $\brank{\str} \leq q+1$.
+
+\begin{definition}\label{def:bi:7.1}
+	Пусть $t \in K^{k \times m \times n}$ является тензором. Пусть множества $I_i, J_j, L_{\ell}$ такие, что:
+	\begin{align*}
+		1 \leq i \leq p: & \; I_i \subseteq \left\{ 1, \dotsc, k \right\}   \\
+		1 \leq j \leq q: & \; J_j \subseteq \left\{ 1, \dotsc, m \right\}   \\
+		1 \leq \ell \leq s: & \; L_{\ell} \subseteq \left\{ 1, \dotsc, n \right\}   
+	\end{align*}
+	Эти множества называют \textbf{разложением $D$}, если следующее выполнено:
+	\begin{align*}
+		I_1 \sqcup I_2 \sqcup \dotsb \sqcup I_p & = \left\{ 1, \dotsc, k \right\}, \\
+		J_1 \sqcup J_2 \sqcup \dotsb \sqcup J_q & = \left\{ 1, \dotsc, m \right\}, \\
+		L_1 \sqcup L_2 \sqcup \dotsb \sqcup L_s & = \left\{ 1, \dotsc, n \right\},
+	\end{align*}
+	где $\sqcup$ обозначает объединение непересекающихся множеств. $t_{I_i, J_j, L_{\ell}} \in K^{|I_i| \times |J_j| \times |L_{\ell}|}$ будет тензором, который получается при ограничении $t$ до слоёв $I_i, J_j, L_{\ell}$, то есть
+	\[
+		(t_{I_i, J_j, L_{\ell}})_{a,b,c} = t_{\widehat{a}, \widehat{b}, \widehat{c}}
+	\]
+	где $\widehat{a}$ --- это $a$-ый наибольший элемент в $I_i$, $\widehat{b}$ и $\widehat{c}$ определяются аналогично. $t_D \in K^{p \times q \times s} = (t_{D,i,j,\ell})$ задаётся как
+	\[
+		t_{D,i,j,\ell} =
+		\begin{cases}
+			1 & \text{если } t_{I_i, J_j, L_{\ell}} \neq 0\\
+			0 & \text{иначе }
+		\end{cases}
+	\]
+	Наконец $\supp_D t \overset{Def}{=} \left\{ (i,j,\ell) \mid  t_{I_i, J_j, L_{\ell}} \neq 0\right\}$.
+\end{definition}
+
+Мы можем думать о наделении тензоров <<внутренней>> и <<внешней>> структурой. $t_{I_i, J_j, L_{\ell}}$ будет внутренним тензором, а тензор $t_D$ --- внешней структурой. Теперь разложим тензор Штрассена $\str$ и проанализируем его внешнюю структуру: определим $D$ следующим образом:
+\[
+	\begin{cases}
+		\begin{array}{cccc}
+			\underset{=I_0}{\left\{ 0 \right\}} & \sqcup & \underset{=I_1}{\left\{ 1, \dotsc, q \right\}} &	= \left\{ 0, \dotsc, q \right\}\\
+			\underset{=J_0}{\left\{ 0 \right\}} & \sqcup & \underset{=J_1}{\left\{ 1, \dotsc, q \right\}} &	= \left\{ 0, \dotsc, q \right\}\\
+			& & \underset{=L_1}{\left\{ 1, \dotsc, q \right\}} &	= \left\{ 1, \dotsc, q \right\}
+		\end{array}
+	\end{cases}
+\]
+Внешняя структура также будет матричным тензором
+\[
+	\str_D = 
+	\begin{pmatrix}
+		1 & 0 \\
+		0 & 1    
+	\end{pmatrix}
+	= \mt{1,2,1}.
+\]
+Внутренние структуры также будут матричными тензорами
+\[
+	\str_{I_i, J_j, L_{\ell}} \in \left\{ \mt{q,1,1}, \mt{1,1,q} \right\}, \text{ для всех } (i,j,\ell) \in \supp_D \str.
+\]
+
+
+\begin{lemma}\label{lem:bi:7.2} 
+	Пусть $\mathcal{T}, \mathcal{T}'$ являются множествами тензоров. Пусть $t \in K^{k \times m \times n}, t' \in K^{k' \times m' \times n'}$ имеют разложения $D, D'$. Допустим, что $t_{I_i, J_j, L_{\ell}} \in \mathcal{T}$ для всех $(i,j,\ell) \in \supp_D t$ и $t_{I_i', J_j', L_{\ell}'}' \in \mathcal{T}'$ для всех $(i,j,\ell) \in \supp_D t'$. Тогда
+	\[
+		D \otimes D' := 
+		\begin{cases}
+			\begin{array}{rrr}
+				I_i \times I_{i'}' & ,1 \leq i \leq p & ,1 \leq i' \leq p'\\
+				J_j \times J_{j'}' & ,1 \leq j \leq q & ,1 \leq j' \leq q'\\
+				L_{\ell} \times L_{\ell'}' & ,1 \leq \ell \leq s & ,1 \leq \ell' \leq s'
+			\end{array}
+		\end{cases}
+	\]
+	является разложением $t \otimes t'$ таким, что
+	\[
+		(t \otimes t')_{D \otimes D'} \cong t_D \otimes t_{D'}'.
+	\]
+	Более того
+	\[
+		(t \otimes t')_{I_i \times I_{i'}', J_j \times J_{j'}', L_{\ell} \times L_{\ell'}'} \in \mathcal{T} \underbrace{\otimes}_{\text{поэлементно}} \mathcal{T}'
+	\]
+	для всех $(i,j,\ell) \in \supp_D t$ и $(i', j', \ell') \in \supp_{D'} t'$.
+\end{lemma}
+
+\begin{exercise}
+	Доказать эту лемму.
+\end{exercise}
+
+Тем же способом мы можем доказать аналогичную теорему для сумм тензоров и для перестановок тензора.
+
+Теперь возьмём перестановку $\pi = (1 \; 2 \; 3)$. Мы имеем
+\[
+	\pi \str_{\pi D} = \mt{1,1,2} \text{ и } \pi^2 \str_{\pi^2 D} = \mt{2,1,1}
+\]
+Взяв тензорное произведение этих трёх тензоров и использовав лемму \ref{lem:bi:7.2}, получим:
+\[
+	(\str \otimes \pi \str \otimes \pi^2 \str)_{D \otimes \pi D \otimes \pi^2 D} \overset{Def}{=} \symstr = \mt{2,2,2},
+\]
+где каждый ненулевой внутренний тензор в начале является элементом из множества
+\[
+	\left\{ \mt{k,m,n} \mid k m n = q^3 \right\}.
+\]
+
+Если тензор $t$ есть ограничение тензора $t'$, тогда $\rank{t} \leq \rank{t'}$. Легко проверить, что также $\brank{t} \leq \brank{t'}$. Мы можем обобщить ограничения так, что они будут всё ещё согласованы с граничным рангом (но не с обычным рангом). Пусть $A(\varepsilon) \in K[\varepsilon]^{k \times k'}, \; B(\varepsilon) \in K[\varepsilon]^{m \times m'}, \; C(\varepsilon) \in K[\varepsilon]^{n \times n'}$ --- полиномиальные матрицы, то есть матрицы чьими элементами являются многочлены от $\varepsilon$. Для тензора $t' \in K^{k' \times m' \times n'}$ с разложением $t' = \sum_{\rho=1}^r u_{\rho} \otimes v_{\rho} \otimes w_{\rho}$, мы положим
+\[
+	(A(\varepsilon) \otimes B(\varepsilon) \otimes C(\varepsilon)) t' \overset{Def}{=} \sum_{\rho=1}^r A(\varepsilon) u_{\rho} \otimes B(\varepsilon) v_{\rho} \otimes C(\varepsilon) w_{\rho}.
+\]
+Как и раньше, легко проверить, что это определение не зависит от разложения и поэтому вполне определено.
+
+\begin{definition}\label{def:bi:7.3}
+	Пусть $t \in K^{k \times m \times n}, \; t' \in K^{k' \times m' \times n'}$. $t$ называется \textbf{вырождением} (англ. degeneration) $t'$, если существуют $A(\varepsilon) \in K[\varepsilon]^{k \times k'}, \; B(\varepsilon) \in K[\varepsilon]^{m \times m'}, \; C(\varepsilon) \in K[\varepsilon]^{n \times n'}$ и $q \in \mathbb{N}$ такие, что
+	\[
+		\varepsilon^q t = (A(\varepsilon) \otimes B(\varepsilon) \otimes C(\varepsilon)) t' + O(\varepsilon^{q+1}).
+	\]
+	Мы будем писать $t \unlhd_q t'$ или $t \unlhd t'$.
+\end{definition}
+
+\begin{remark}
+	$\brank{t} \leq r \iff t \unlhd \left\langle r \right\rangle$
+\end{remark}
+
+\begin{lemma}\label{lem:bi:7.5} 
+	Для всех нечётных $n$
+	\[
+		\mt{\ceil{\frac{3}{4} n^2}} \unlhd \mt{n, n, n}.
+	\]
+	Более того это вырождение можно получить с помощью мономиального отображения, то есть матрицы $A(\varepsilon)$, $B(\varepsilon)$ и $C(\varepsilon)$ будут диагональными матрицами со степенями $\varepsilon$ на диагонали.
+\end{lemma}
+
+Прежде чем доказать эту лемму, поясним что она означает. $\brank{\mt{n,n,n}} \leq r$ или эквивалентно $\mt{n,n,n} \unlhd \mt{r}$ значит, что за $r$ билинейных умножений мы можем <<купить>> тензор $\mt{n,n,n}$. $\mt{\ell} \unlhd \mt{n,n,n}$ означает, что если мы <<перепродадим>> тензор $\mt{n,n,n}$, то мы получим обратно $\ell$ билинейных умножений.
+
+\begin{proof}
+	Пусть $n = 2 \nu + 1$. Мы проиндексируем строки и столбцы матриц числами $-\nu, \dotsc, \nu$. Мы зададим матрицы $A$, $B$ и $C$, указав их значения на стандартном базисе $k^{n \times n}$ (элементы $e_{ij}$ будут векторами длины $n^2$, для нумерации которых используется двойной индекс):
+	\[
+		\begin{array}{ll}
+			A: & e_{ij} \to e_{ij} \varepsilon^{i^2 + 2ij}\\
+			B: & e_{jk} \to e_{jk} \varepsilon^{j^2 + 2jk}\\
+			C: & e_{ki} \to e_{ki} \varepsilon^{k^2 + 2ki}  
+		\end{array}
+	\]
+	поэтому каждая матрица будет диагональной размера $n^2 \times n^2$ со степенями $\varepsilon$ на диагонали.
+	
+	Мы имеем
+	\[
+		\mt{n,n,n} = \sum_{i,j,k = -\nu}^{\nu} e_{ij} \otimes e_{jk} \otimes e_{ki},
+	\]
+	таким образом
+	\[
+		A \otimes B \otimes C \mt{n,n,n} = \sum_{i,j,k= -\nu}^{\nu} \underbrace{\varepsilon^{i^2 + 2ij + j^2 + 2jk + k^2 + 2ki}}_{= \varepsilon^{(i+j+k)^2}} e_{ij} \otimes e_{jk} \otimes e_{ki}.
+	\]
+	Если $i + j + k = 0$, то $\left\{ \begin{array}{c} i,k \\ i,j \\ j,k \end{array} \right\}$ определяет $\left\{ \begin{array}{c} j\\k\\i \end{array} \right\}$. Поэтому все члены со степенью 0 образуют множество независимых произведений. Легко увидеть, что существует $\geq \frac{3}{4} n^2$ троек $(i,j,k)$, для которых $i + j + k = 0$.
+	\begin{question}
+		Я этого не вижу.
+	\end{question}
+\end{proof}
+
+Теперь мы начнём с тензора $\symstr$ и соответствующего разложения $\symd$. Затем мы возьмём $s$-ую тензорную степень. Внешняя структура $\symstr_{\symd^{\otimes s}}^{\otimes s}$ изоморфна $\mt{2^s, 2^s, 2^s}$. Ненулевые тензоры внутренней структуры все вида $\mt{k,m,n}$, где $kmn = q^{3s}$.
+
+Мы имеем
+\[
+	\mt{\frac{3}{4} 2^{2s}} \underbrace{\unlhd}_{\text{Лемма \ref{lem:bi:7.5}} } (\symstr)_{\symd^{\otimes s}}^{\otimes s}
+\]
+\begin{question}
+	Вообще то эта лемма была для нечетных $n$.
+\end{question}
+Так как это вырождение есть мономиальное вырождение, мы получим, расширив вырождение до всего тензора, что прямая сумма $\frac{3}{4} 2^{2s}$ матричных тензоров $\mt{k_i,m_i,n_i}$, $1 \leq i \leq \frac{3}{4} 2^s$, где $k_i m_i n_i = q^{3s}$, имеет граничный ранг меньший или равный $\brank{\symstr}^s = \brank{\str}^{3s} = (q+1)^{3s}$. К этой сумме мы можем применить $\tau$-теорему и получить
+\begin{align*}
+	(q^{3s})^\tau \frac{3}{4} 2^{2s} & \leq (q+1)^{3s}\\
+	q^{3 \tau} \underbrace{\sqrt[s]{\frac{3}{4}}}_{\to 1} 2^2   & \leq (q+1)^3.
+\end{align*}
+Таким образом $\omega \leq \log_q \frac{(q+1)^3}{4}$. Минимум достигается при $q=5$, и это даёт результат $\omega \leq 2.48$.
+
+\begin{theorem}[Штрассен \cite{Strassen1987}]\label{th:bi:7.6} 
+	$\omega \leq 2.48$
+\end{theorem}
+
+\begin{reseach}
+	Каким будет $\brank{\symstr}$? Будет ли он строго меньше, чем $(q+1)^3$.
+\end{reseach}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

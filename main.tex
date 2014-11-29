@@ -1,0 +1,178 @@
+\documentclass[11pt,a4paper,twoside]{report}
+
+\usepackage[noTeX]{mmap}%чтобы можно было искать и копировать текст на русском и формулы
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english,russian]{babel}
+\usepackage{amssymb,amsfonts,amsmath,mathtext,enumerate,float,amsthm,xfrac,empheq} 
+\usepackage{mathrsfs}%Ralph Smith’s Formal Script Font
+
+\usepackage{setspace} 
+\onehalfspacing
+
+\usepackage{geometry}
+\geometry{left=3cm, right=2cm, top=2cm, bottom=2.5cm}
+
+\usepackage{tocloft}%чтобы точки были в содержании
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+
+\usepackage{tikz}%для рисования диаграмм
+\tikzset{node distance=3cm, auto}
+
+\usepackage{indentfirst}%чтобы первый параграф был с отступом
+
+\usepackage{hyperref}%добавляет гиперссылки
+\usepackage[hypcap]{caption}%чтобы правильно отрабатывался переход по ссылке на изображение
+\usepackage{cancel}%для зачёркивания символов
+
+\usepackage{biblatex}
+\defbibheading{bibliography}{\chapter*{Литература}\addcontentsline{toc}{chapter}{Литература}}
+\bibliography{main}
+\AtEveryBibitem{\clearlist{language}}
+
+%чтобы списки были более сжатыми по вертикали
+\newlength{\wideitemsep}
+\setlength{\wideitemsep}{.5\itemsep}
+\addtolength{\wideitemsep}{-7pt}
+\let\olditem\item
+\renewcommand{\item}{\setlength{\itemsep}{\wideitemsep}\olditem}
+
+\numberwithin{equation}{section}
+
+\def\multiset#1#2{\ensuremath{\left(\kern-.3em\left(\genfrac{}{}{0pt}{}{#1}{#2}\right)\kern-.3em\right)}}
+
+\newcommand{\coker}{\operatorname{coker}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\tr}{\operatorname{tr}}
+\renewcommand{\mod}{\operatorname{mod}\;}
+
+\newcommand{\str}{\operatorname{Str}}
+\newcommand{\symstr}{\operatorname{Sym-Str}}
+\newcommand{\symd}{\operatorname{Sym-D}}
+\newcommand{\supp}{\operatorname{supp}}
+
+\newcommand{\rank}[1]{R\left(#1\right)}
+\newcommand{\brank}[1]{\underline{R}\left(#1\right)}
+\newcommand{\ceilfrac}[2]{\left\lceil \frac{#1}{#2} \right\rceil}
+\newcommand{\ceil}[1]{\left\lceil #1 \right\rceil}
+
+\newcommand{\ab}[1]{\left\langle #1 \right\rangle}
+\newcommand{\mt}[1]{\ab{#1}}
+
+\newcommand{\cb}[1]{\left\{ #1 \right\}}
+
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\CC}{\mathbb{C}}
+
+\newcommand{\GF}[1]{\mathbb{F}_{#1}}
+\newcommand{\GL}[2]{GL_{#1}(#2)}
+
+\newcommand{\fa}[1]{F_{#1}^{ab}}
+\newcommand{\chr}[1]{\operatorname{char}(#1)}
+\newcommand\restr[2]{{% we make the whole thing an ordinary symbol
+  \left.\kern-\nulldelimiterspace % automatically resize the bar with \right
+  #1 % the function
+  \vphantom{\big|} % pretend it's a little taller at normal size
+  \right|_{#2} % this is the delimiter
+  }}
+  
+%чтобы у всех видов теорем нумерация была сквозной в пределах section
+\newcounter{dummy} 
+
+\newtheorem{theorem}[dummy]{Теорема}
+\newtheorem{lemma}[dummy]{Лемма}
+\newtheorem{prop}[dummy]{Утверждение}
+\newtheorem{corollary}[dummy]{Следствие}
+\newtheorem{conj}[dummy]{Гипотеза}
+\newtheorem{remark}[dummy]{Замечание}
+\theoremstyle{definition}
+\newtheorem{definition}[dummy]{Определение}
+\newtheorem{example}[dummy]{Пример}
+\theoremstyle{remark}
+\newtheorem{observation}[dummy]{Наблюдение}
+\newtheorem{notation}[dummy]{Обозначение}
+\newtheorem{reseach}[dummy]{Исследовательская задача}
+\newtheorem{exercise}[dummy]{Упражнение}
+
+\usepackage{mdframed}
+\newmdtheoremenv{question}{Вопрос}
+
+\begin{document}
+	\input{titlepage}
+	
+	\tableofcontents 
+	\clearpage
+	
+	\chapter*{Предисловие}
+	\addcontentsline{toc}{chapter}{Предисловие}
+	\input{preface}
+		
+	\chapter*{Список обозначений}
+	\addcontentsline{toc}{chapter}{Список обозначений}
+	\input{notation}
+	
+	\chapter*{Введение}
+	\addcontentsline{toc}{chapter}{Введение}
+	\input{introduction}
+	
+	\chapter{Сложность билинейных задач}
+	\input{complexity/Strassen_algorithm}
+	\input{complexity/general_model}
+	\input{complexity/bilinear_problems}
+	\input{complexity/rank}
+	\input{complexity/matrix_exponent}
+	\input{complexity/tensors}
+	\input{complexity/border_rank}
+	\input{complexity/tau_theorem}
+	\input{complexity/laser_method}
+	
+	\chapter{Статья Кона и Уманса 2003 года \cite{Cohn03}}
+	\input{2003/analogy}
+	\input{2003/realizing}
+	
+	\chapter{Статья Кона и других 2005 года \cite{Cohn05}}
+В этом разделе будет описан комбинаторный объект, называемый усиленной ОР-матрицей, с помощью которого в сплетении можно построить множества, удовлетворяющие свойству тройного произведения. Использование усиленных ОР-матриц позволяет доказать, что $\omega < 2.48$, и предположить, что существуют усиленные ОР-матрицы, доказывающие, что $\omega = 2$.
+	\input{2005/preliminaries}
+	\input{2005/usp}
+	\input{2005/sunflower}
+	\input{2005/usp_application}
+	\input{2005/triangle_construction}
+	\input{2005/sdpp}
+	\input{2005/stpp}
+	\input{2005/using_stpp}
+	\input{2005/wreath_construction}
+	
+	\chapter{Статья Кона и Уманса 2012 года \cite{Cohn12}}
+В статье 2012 года Кон и Уманс ввели ослабление понятия тензорного ранга, которое они назвали $s$-рангом, и показали, что верхние оценки $s$-ранга тензора матричного умножения будут также накладывать ограничения на обычный ранг. В частности, если <<$s$-ранговая экспонента матричного умножения>>	равна 2, то $\omega=2$. Эта связь между $s$-ранговой и обычной экспонентами позволяет значительно обобщить теоретико-групповой подход из предыдущих статей авторов, путём замены групповых алгебр на общие алгебры. 
+
+В этой статье авторы установили, что алгебры смежности для когерентных конфигураций являются многообещающим семейством алгебр в этом новом обобщении. Когерентные конфигурации являются комбинаторными объектами, обобщающими понятие группы и группового действия. Алгебры смежности аналогичны групповым алгебрам и сохраняют многие из их свойств. Так же как и группы, когерентные конфигурации обеспечивают матричное умножение при выполнении определённого комбинаторного условия, в основе которого лежит встречавшаяся ранее треугольная конструкция.
+
+Наконец, в этой статье авторы доказали свойство замыкания для симметрических степеней алгебр смежности, что дало возможность доказать нетривиальные оценки $\omega$ при помощи когерентных конфигураций и предположить, что коммутативных когерентных конфигураций будет достаточно для доказательства $\omega=2$. Все вместе эти результаты показывают, что оценки $\omega$ могут быть получены за счёт вложения произведения больших матриц в маленькие коммутативные когерентные конфигурации, избегая при этом осложнений, связанных с теорией представлений, которая использовалась раньше в теоретико-групповом подходе.
+	\input{2012/intro}
+	\input{2012/background}
+	\input{2012/bounds}
+	\input{2012/multiplication_via_CC}
+	\input{2012/example}
+	\input{2012/embeddings}
+	\input{2012/families}
+	
+	\chapter*{Заключение}
+	\addcontentsline{toc}{chapter}{Заключение}
+	\input{conclusion}
+	
+	\chapter{Дополнения}
+	\label{appendix}
+	\input{appendix/action}
+	\input{appendix/semidirect_product}
+	\input{appendix/group_algebra}
+	\input{appendix/o_notation}
+	\input{appendix/representation}
+	
+	\nocite{*}
+	
+	\printbibliography
+
+\end{document}
+

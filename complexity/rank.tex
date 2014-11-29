@@ -1,0 +1,75 @@
+\section{Ранг билинейных задач}
+
+Штрассен \cite{Strassen:1973} показал, что для вычисления множества билинейных форм деления не нужны при условии, что поле скаляров достаточно большое.
+
+\begin{theorem}\label{th:3.1}
+Пусть $f_\kappa = \sum\limits_{\mu,\nu=1}^{N} t_{\kappa \mu \nu} x_\mu x_\nu, \; 1 \leq \kappa \leq k$. Если $|K| = \infty$ и $C^{*/}(F)=\ell$, тогда существует оптимальное вычисление (то есть за меньшее количество операций задачу не посчитать), состоящее из произведений
+\[
+	P_\lambda = \left( \sum\limits_{i=1}^{N} u_{\lambda i} x_i  \right) \left( \sum\limits_{i=1}^{N} v_{\lambda i} x_i  \right), \; 1 \leq \lambda \leq \ell,
+\]  
+такое, что $F \subseteq lin_K \{ P_1 , \ldots, P_\ell  \} = \{ \alpha_1 P_1 + \ldots + \alpha_\ell P_\ell |\alpha_i \in K \}$. В частности, $C^{*/}(F)=C^{*}(F)$.
+\end{theorem}
+
+Матричное умножение и умножение многочленов являются билинейными задачами, поэтому мы можем разделить переменные на два множества $\{ x_1, \ldots, x_M  \}$ и $\{ y_1, \ldots, y_N  \}$ и записать квадратичные формы как 
+\[
+	f_k = \sum\limits_{\mu=1}^{M} \sum\limits_{\nu=1}^{N} t_{\kappa \mu \nu} x_\mu y_\nu, \; 1 \leq \kappa \leq k.
+\]
+Тензор $(t_{\kappa \mu \nu}) \in K^{k \times M \times N}$ будет единственным и поэтому понятие симметрической эквивалентности не потребуется.
+
+Теорема \ref{th:3.1} говорит нам, что при использовании меры Островского мы должны рассматривать только произведения линейных форм. При вычислении билинейных форм будет естественным ограничиться произведениями вида, где линейная форма от переменных $\{ x_1, \ldots, x_M  \}$  умножается на линейную форму от $\{ y_1, \ldots, y_N  \}$.
+
+\begin{definition}
+  Минимальное число произведений
+  \[
+  	P_\lambda = \left( \sum\limits_{\mu=1}^{M} u_{\lambda \mu} x_\mu \right) \left( \sum\limits_{\nu=1}^{N} v_{\lambda \nu} y_\nu \right),\; 1 \leq \lambda \leq l
+  \]
+  таких, что $F \subseteq lin_K \{ P_1 , \ldots, P_\ell  \}$ называется \textbf{рангом} $F = \{ f_1, \ldots f_k \}$ или \textbf{билинейной сложностью $F$} и обозначается как $R(F)$.
+\end{definition}
+
+Мы можем также определить ранг в терминах тензоров. Пусть $(t_{\kappa \mu \nu})$ тензор задачи $F$. Имеем, что $ R(F) \leq l$\\
+$\Longleftrightarrow $ существуют линейные формы  $u_1, \ldots, u_\ell $ от $x_1, \ldots, x_M$  и $v_1, \ldots, v_\ell $  от $y_1, \ldots, y_N$  такие, что $F  \subseteq lin_K \{ u_1v_1 , \ldots, u_\ell v_\ell  \}$\\
+$\Longleftrightarrow$ существуют $w_{\lambda \kappa} \in K,\; 1 \leq \lambda \leq l, \; 1 \leq \kappa \leq k$  такие, что 
+\[
+	f_\kappa = \sum\limits_{\lambda=1}^{l} w_{\lambda \kappa} u_\lambda v_\lambda = \sum\limits_{\lambda=1}^{l} \left( \sum\limits_{\mu=1}^{M} u_{\lambda \mu} x_\mu \right)\left( \sum\limits_{\nu=1}^{N} v_{\lambda \nu}y_\nu \right), \; 1 \leq \kappa \leq k.
+\]
+Сравнив коэффициенты, получим
+\[
+	t_{\kappa \mu \nu} = \sum\limits_{\lambda=1}^{l} w_{\lambda \kappa} u_{\lambda \mu} v_{\lambda \nu}, \; 1 \leq \kappa \leq k, \; 1 \leq \mu \leq M, \; 1 \leq \nu \leq N.
+\]
+
+\begin{definition}
+  Пусть $w \in K^k,\; u \in K^M,\; v \in K^N$. Тензор $w \otimes u \otimes v \in K^{k \times M \times N}$ с элементом $w_k u_\mu v_\nu$ в позиции $(\kappa, \mu, \nu)$ называется \textbf{триадой}. 
+\end{definition}
+
+Из приведённых выше вычислений получим, что $R(F) \leq l$\\
+$\Longleftrightarrow $ существуют $w_1, \ldots, w_\ell \in K^k, \; u_1, \ldots, u_\ell \in K^M$ и $v_1, \ldots, v_\ell \in K^N $ такие, что
+\[
+	t = (t_{\kappa \mu \nu}) = \sum\limits_{\lambda=1}^{l} \underbrace{w_\lambda \otimes u_\lambda \otimes v_\lambda}_\text{триада}.
+\]
+
+Определим \phantomsection \label{def:tensor_rank} ранг $R(t)$ тензора $t$ как минимальное число триад таких, что $t$ является их суммой. Каждое множество билинейных форм $F$  имеет соответствующий тензор $t$ и наоборот. Как видно их ранги совпадают.
+
+Мультипликативная сложность и ранг линейно связаны.
+\begin{theorem}\label{th:bi:3.7} 
+  Пусть $F = \left\{ f_1, \dotsc, f_k \right\}$ --- это множество билинейных форм от переменных $\left\{ x_1, \dotsc, x_M \right\}$ и $\left\{ y_1, \dotsc, y_N \right\}$. Тогда
+\[
+	C^{*/}(F) \leq R(F) \leq 2 C^{*/}(F).
+\]
+\end{theorem}
+\begin{proof}
+  Первое неравенство должно быть ясно --- число билинейных умножений никак не может быть меньше числа обычных умножений. Для второго неравенства предположим, что $C^{*/}(F) = \ell$ и рассмотрим оптимальное вычисление. Мы имеем
+\begin{align*}
+  f_\kappa & = 
+\sum_{\lambda=1}^{\ell} w_{\lambda \kappa} 
+\left( \sum_{\mu=1}^{M} u_{\lambda \mu} x_{\mu} + \sum_{\nu=1}^{N} u_{\lambda \nu}' y_{\nu} \right)
+\left( \sum_{\mu=1}^{M} v_{\lambda \mu}' x_{\mu} + \sum_{\nu=1}^{N} v_{\lambda \nu} y_{\nu} \right)\\
+  & = 
+\sum_{\lambda=1}^{\ell} w_{\lambda \kappa} \left( \sum_{\mu=1}^{M} u_{\lambda \mu} x_{\mu} \right) \left( \sum_{\nu=1}^{N} v_{\lambda \nu} y_{\nu} \right) + 
+\sum_{\lambda=1}^{\ell} w_{\lambda \kappa} \left( \sum_{\mu=1}^{M} v_{\lambda \mu}' x_{\mu} \right)\left( \sum_{\nu=1}^{N} u_{\lambda \nu}' y_{\nu} \right).
+\end{align*}
+Члены вида $x_i x_j$ и $y_i y_j$ должны компенсировать друг друга, так как они не появляются в $f_{\kappa}$.
+\end{proof}
+
+
+
+
